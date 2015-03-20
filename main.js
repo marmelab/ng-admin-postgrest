@@ -7,8 +7,10 @@
 
     app.config(function(RestangularProvider, $httpProvider) {
         RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig) {
+            headers = headers || {};
+            headers['Prefer'] = 'return=representation';
+
             if (operation === 'getList') {
-                headers = headers || {};
                 headers['Range-Unit'] = what;
                 headers['Range'] = ((params._page - 1) * params._perPage) + '-' + (params._page * params._perPage - 1);
                 delete params._page;
@@ -28,15 +30,6 @@
                     return data[0];
                 case 'getList':
                     response.totalCount = response.headers('Content-Range').split('/')[1];
-                    break;
-                case 'post':
-                    var location = response.headers('Location');
-                    var pattern = /\?id=eq.(\d+)$/;
-
-                    if (pattern.test(location)) {
-                        data = data || {};
-                        data['id'] = pattern.exec(location)[1];
-                    }
                     break;
             }
 
@@ -65,7 +58,7 @@
         var nga = NgAdminConfigurationProvider;
 
         var app = nga
-            .application('Ng-admin • PostgRest')
+            .application('Ng-admin + PostgRest')
             .baseApiUrl('https://postgrest.herokuapp.com/');
 
         var speaker = nga.entity('speakers');
