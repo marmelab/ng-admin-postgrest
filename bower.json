@@ -1,9 +1,9 @@
 {
-    "name": "ng_admin__postgrest",
-    "dependencies": {
-        "ng-admin": "~0.6.0"
-    },
-    "resolutions": {
-        "angular": "1.3.14"
-    }
+  "name": "ng_admin__postgrest",
+  "dependencies": {
+    "ng-admin": "~0.6.0"
+  },
+  "resolutions": {
+    "angular": "~1.3.1"
+  }
 }
