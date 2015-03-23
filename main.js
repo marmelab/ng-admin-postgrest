@@ -12,7 +12,6 @@
 
             if (operation === 'getList') {
                 headers['Range-Unit'] = what;
-                headers['Range-Unit'] = what;
                 headers['Range'] = ((params._page - 1) * params._perPage) + '-' + (params._page * params._perPage - 1);
                 delete params._page;
                 delete params._perPage;
@@ -59,7 +58,7 @@
         var nga = NgAdminConfigurationProvider;
 
         var app = nga
-            .application('Ng-admin + PostgRest')
+            .application('Ng-admin + PostgREST')
             .baseApiUrl('https://postgrest.herokuapp.com/');
 
         var speaker = nga.entity('speakers');
