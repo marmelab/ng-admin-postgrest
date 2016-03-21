@@ -21,6 +21,25 @@
                     delete params._sortField;
                     delete params._sortDir;
                 }
+
+                if (params._filters)
+                {
+                    var filterValue
+                    for (var filterName in params._filters)
+                    {
+                        filterValue = params._filters[filterName]
+                        if (isNaN(filterValue))
+                        {
+                            filterValue = "like." + filterValue
+                        }
+                        else
+                        {
+                            filterValue = "eq." + filterValue
+                        }
+                        params[filterName] = filterValue;
+                    }
+                    delete params._filters;
+                }
             }
         });
 
